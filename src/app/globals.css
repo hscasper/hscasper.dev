@@ -1,21 +1,27 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #0a0a0a;
-  --color-foreground: #ededed;
+  --color-background: #09090b;
+  --color-foreground: #f4f4f5;
   --color-muted: #a1a1aa;
-  --color-accent: #3b82f6;
-  --color-accent-hover: #60a5fa;
-  --color-surface: #111111;
-  --color-surface-light: #1a1a1a;
-  --color-border: #262626;
+  --color-accent: #8b5cf6;
+  --color-accent-hover: #a78bfa;
+  --color-accent-dim: #8b5cf620;
+  --color-surface: #111113;
+  --color-surface-light: #1a1a1f;
+  --color-border: #27272a;
+  --color-warm: #f59e0b;
 
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-fira-code);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
 
-  --animate-fade-up: fade-up 0.5s ease-out both;
-  --animate-fade-in: fade-in 0.5s ease-out both;
-  --animate-slide-in-right: slide-in-right 0.5s ease-out both;
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slide-in-right: slide-in-right 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
+  --animate-grid: grid-fade 3s ease-in-out infinite alternate;
 
   @keyframes fade-up {
     from {
@@ -43,6 +49,21 @@
       transform: translateX(0);
     }
   }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+
+  @keyframes grid-fade {
+    from { opacity: 0.02; }
+    to { opacity: 0.06; }
+  }
 }
 
 html {
@@ -56,6 +77,10 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), system-ui, sans-serif;
 }
 
 ::selection {
@@ -88,4 +113,8 @@ body {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+@utility font-heading {
+  font-family: var(--font-heading), system-ui, sans-serif;
 }

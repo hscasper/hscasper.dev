@@ -15,14 +15,13 @@ export function Projects() {
       : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="projects" className="bg-surface px-6 py-24">
+    <section id="projects" className="bg-surface/50 px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           title="Projects"
-          subtitle="A selection of things I've built and shipped."
+          subtitle="Stuff I shipped — and what I learned building it."
         />
 
-        {/* Filter tabs */}
         <div
           className="mb-10 flex flex-wrap justify-center gap-2"
           role="tablist"
@@ -34,26 +33,32 @@ export function Projects() {
               role="tab"
               aria-selected={activeCategory === category}
               onClick={() => setActiveCategory(category)}
-              className={`rounded-lg px-4 py-2 text-sm font-medium transition-all ${
+              className={`relative rounded-lg px-4 py-2 text-sm font-medium transition-all ${
                 activeCategory === category
-                  ? "bg-accent text-white"
-                  : "bg-surface-light text-muted hover:text-foreground"
+                  ? "text-white"
+                  : "text-muted hover:text-foreground hover:bg-surface-light"
               }`}
             >
-              {category}
+              {activeCategory === category && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute inset-0 rounded-lg bg-accent"
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+                />
+              )}
+              <span className="relative z-10">{category}</span>
             </button>
           ))}
         </div>
 
-        {/* Project grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.3 }}
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2"
           >
             {filteredProjects.map((project, index) => (
               <ProjectCard

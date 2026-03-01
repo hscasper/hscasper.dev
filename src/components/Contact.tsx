@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import { FiSend, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { FiSend, FiGithub, FiLinkedin, FiMail, FiCheck } from "react-icons/fi";
 import { SectionHeading } from "./SectionHeading";
 import { siteConfig, socialLinks } from "@/lib/data";
 
@@ -44,6 +44,7 @@ export function Contact() {
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -62,47 +63,53 @@ export function Contact() {
       setErrors(validationErrors);
       return;
     }
-    // TODO: Replace with Formspree/Web3Forms endpoint
     console.log("Form submitted:", formData);
     setSubmitted(true);
     setFormData({ name: "", email: "", message: "" });
   }
+
+  const inputClasses = (field: keyof FormErrors) =>
+    `w-full rounded-xl border bg-surface-light px-4 py-3 text-foreground placeholder:text-muted/40 transition-all focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent/50 ${
+      errors[field] ? "border-red-500" : "border-border"
+    } ${focusedField === field ? "shadow-lg shadow-accent/5" : ""}`;
 
   return (
     <section id="contact" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           title="Get in Touch"
-          subtitle="Have a project in mind? Let's work together."
+          subtitle="Have a project in mind? I'd love to hear about it."
         />
 
         <div className="mx-auto grid max-w-4xl gap-12 md:grid-cols-2">
-          {/* Contact info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="mb-4 text-xl font-semibold">
-              Let&apos;s build something great.
+            <h3 className="mb-4 font-heading text-2xl font-semibold">
+              Let&apos;s build something
+              <span className="text-accent"> great</span>.
             </h3>
             <p className="mb-6 leading-relaxed text-muted">
-              I&apos;m always open to discussing new projects, creative ideas,
-              or opportunities to be part of something meaningful. Drop me a
-              message and I&apos;ll get back to you as soon as possible.
+              Whether it&apos;s a full-stack application, an API, or a
+              conversation about distributed systems — I&apos;m always open
+              to discussing new ideas. Drop me a message and I&apos;ll reply
+              within 24 hours.
             </p>
 
             <div className="mb-8">
+              <p className="mb-1 text-sm font-medium text-muted">Email me at</p>
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="text-accent transition-colors hover:text-accent-hover"
+                className="font-mono text-accent transition-colors hover:text-accent-hover"
               >
                 {siteConfig.email}
               </a>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               {socialLinks.map((link) => (
                 <a
                   key={link.name}
@@ -110,7 +117,7 @@ export function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.name}
-                  className="rounded-lg border border-border p-3 text-muted transition-all hover:border-accent hover:text-accent"
+                  className="rounded-xl border border-border p-3 text-muted transition-all hover:border-accent/40 hover:bg-accent/5 hover:text-accent hover:scale-105"
                 >
                   {socialIcons[link.icon] ?? link.name}
                 </a>
@@ -118,7 +125,6 @@ export function Contact() {
             </div>
           </motion.div>
 
-          {/* Contact form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -126,12 +132,21 @@ export function Contact() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             {submitted ? (
-              <div className="flex h-full items-center justify-center rounded-2xl border border-border bg-surface p-8">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="flex h-full items-center justify-center rounded-2xl border border-accent/20 bg-accent/5 p-8"
+              >
                 <div className="text-center">
-                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-accent/10">
-                    <FiSend className="text-accent" size={24} />
-                  </div>
-                  <h4 className="text-xl font-semibold">Message Sent!</h4>
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", bounce: 0.5, delay: 0.1 }}
+                    className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-accent/20"
+                  >
+                    <FiCheck className="text-accent" size={28} />
+                  </motion.div>
+                  <h4 className="font-heading text-xl font-semibold">Message Sent!</h4>
                   <p className="mt-2 text-muted">
                     Thanks for reaching out. I&apos;ll get back to you soon.
                   </p>
@@ -142,7 +157,7 @@ export function Contact() {
                     Send another message
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ) : (
               <form
                 onSubmit={handleSubmit}
@@ -162,9 +177,9 @@ export function Contact() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full rounded-lg border bg-surface-light px-4 py-2.5 text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-accent ${
-                      errors.name ? "border-red-500" : "border-border"
-                    }`}
+                    onFocus={() => setFocusedField("name")}
+                    onBlur={() => setFocusedField(null)}
+                    className={inputClasses("name")}
                     placeholder="Your name"
                   />
                   {errors.name && (
@@ -185,9 +200,9 @@ export function Contact() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full rounded-lg border bg-surface-light px-4 py-2.5 text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-accent ${
-                      errors.email ? "border-red-500" : "border-border"
-                    }`}
+                    onFocus={() => setFocusedField("email")}
+                    onBlur={() => setFocusedField(null)}
+                    className={inputClasses("email")}
                     placeholder="you@example.com"
                   />
                   {errors.email && (
@@ -207,10 +222,10 @@ export function Contact() {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
+                    onFocus={() => setFocusedField("message")}
+                    onBlur={() => setFocusedField(null)}
                     rows={5}
-                    className={`w-full resize-none rounded-lg border bg-surface-light px-4 py-2.5 text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-accent ${
-                      errors.message ? "border-red-500" : "border-border"
-                    }`}
+                    className={`${inputClasses("message")} resize-none`}
                     placeholder="Tell me about your project..."
                   />
                   {errors.message && (
@@ -222,10 +237,10 @@ export function Contact() {
 
                 <button
                   type="submit"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent py-3 font-medium text-white transition-colors hover:bg-accent-hover"
+                  className="group flex w-full items-center justify-center gap-2 rounded-xl bg-accent py-3.5 font-medium text-white transition-all hover:bg-accent-hover hover:shadow-lg hover:shadow-accent/25"
                 >
                   Send Message
-                  <FiSend size={16} />
+                  <FiSend size={16} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-0.5" />
                 </button>
               </form>
             )}

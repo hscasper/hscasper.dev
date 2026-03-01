@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border px-6 py-12">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 text-center">
-        <a href="#" className="text-lg font-bold tracking-tight">
+        <a href="#" className="font-heading text-lg font-bold tracking-tight">
           {siteConfig.name.split(" ")[0]}
           <span className="text-accent">.</span>
         </a>
@@ -17,7 +17,7 @@ export function Footer() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="text-sm text-muted transition-colors hover:text-foreground"
+                  className="text-sm text-muted transition-colors hover:text-accent"
                 >
                   {link.label}
                 </a>
@@ -34,16 +34,20 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={link.name}
-              className="text-muted transition-colors hover:text-foreground"
+              className="text-muted transition-colors hover:text-accent"
             >
               {link.name}
             </a>
           ))}
         </div>
 
-        <p className="text-sm text-muted">
-          &copy; {year} {siteConfig.name}.
-        </p>
+        <div className="h-px w-full max-w-xs bg-border" />
+
+        <div className="space-y-1">
+          <p className="text-sm text-muted">
+            &copy; {year} {siteConfig.name}. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   );

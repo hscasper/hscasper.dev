@@ -8,11 +8,32 @@ import { navLinks, siteConfig } from "@/lib/data";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${entry.target.id}`);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -50% 0px" }
+    );
+
+    navLinks.forEach((link) => {
+      const el = document.querySelector(link.href);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -30,7 +51,7 @@ export function Navbar() {
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? "border-b border-border bg-background/80 backdrop-blur-lg"
+          ? "border-b border-border/50 bg-background/80 backdrop-blur-xl"
           : "bg-transparent"
       }`}
     >
@@ -40,45 +61,53 @@ export function Navbar() {
       >
         <a
           href="#"
-          className="text-lg font-bold tracking-tight transition-colors hover:text-accent"
+          className="font-heading text-lg font-bold tracking-tight transition-colors hover:text-accent"
         >
           {siteConfig.name.split(" ")[0]}
           <span className="text-accent">.</span>
         </a>
 
-        {/* Desktop links */}
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-sm text-muted transition-colors hover:text-foreground"
+                className={`relative rounded-lg px-3 py-2 text-sm transition-colors ${
+                  activeSection === link.href
+                    ? "text-accent"
+                    : "text-muted hover:text-foreground"
+                }`}
               >
                 {link.label}
+                {activeSection === link.href && (
+                  <motion.div
+                    layoutId="navIndicator"
+                    className="absolute inset-x-1 -bottom-0.5 h-0.5 rounded-full bg-accent"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+                  />
+                )}
               </a>
             </li>
           ))}
-          <li>
+          <li className="ml-4">
             <a
               href="#contact"
-              className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+              className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-all hover:bg-accent-hover hover:shadow-lg hover:shadow-accent/20"
             >
               Let&apos;s Talk
             </a>
           </li>
         </ul>
 
-        {/* Mobile toggle */}
         <button
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="relative z-50 md:hidden"
+          className="relative z-50 rounded-lg p-2 text-muted transition-colors hover:text-foreground md:hidden"
           aria-label={isMobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMobileOpen}
         >
-          {isMobileOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          {isMobileOpen ? <FiX size={22} /> : <FiMenu size={22} />}
         </button>
 
-        {/* Mobile menu */}
         <AnimatePresence>
           {isMobileOpen && (
             <motion.div
@@ -86,7 +115,7 @@ export function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-40 flex items-center justify-center bg-background/95 backdrop-blur-md md:hidden"
+              className="fixed inset-0 z-40 flex items-center justify-center bg-background/95 backdrop-blur-xl md:hidden"
             >
               <motion.ul
                 initial={{ opacity: 0, y: 20 }}
@@ -105,7 +134,9 @@ export function Navbar() {
                     <a
                       href={link.href}
                       onClick={() => setIsMobileOpen(false)}
-                      className="text-2xl font-medium transition-colors hover:text-accent"
+                      className={`font-heading text-2xl font-medium transition-colors hover:text-accent ${
+                        activeSection === link.href ? "text-accent" : ""
+                      }`}
                     >
                       {link.label}
                     </a>
@@ -119,7 +150,7 @@ export function Navbar() {
                   <a
                     href="#contact"
                     onClick={() => setIsMobileOpen(false)}
-                    className="rounded-lg bg-accent px-6 py-3 text-lg font-medium text-white transition-colors hover:bg-accent-hover"
+                    className="rounded-xl bg-accent px-6 py-3 text-lg font-medium text-white transition-colors hover:bg-accent-hover"
                   >
                     Let&apos;s Talk
                   </a>

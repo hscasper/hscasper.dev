@@ -1,25 +1,31 @@
 import type { Metadata } from 'next';
-import { Inter, Fira_Code } from 'next/font/google';
+import { Space_Grotesk, DM_Sans, Fira_Code } from 'next/font/google';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import './globals.css';
 
-const inter = Inter({
-  variable: '--font-inter',
+const spaceGrotesk = Space_Grotesk({
+  variable: '--font-heading',
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+});
+
+const dmSans = DM_Sans({
+  variable: '--font-sans',
   subsets: ['latin'],
 });
 
 const firaCode = Fira_Code({
-  variable: '--font-fira-code',
+  variable: '--font-mono',
   subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: 'Shaheer Hassan',
+  title: 'Shaheer Hassan — Full Stack Developer',
   description:
     'Personal portfolio of Shaheer Hassan — a full stack developer building modern web applications with clean code and thoughtful design.',
   openGraph: {
-    title: 'Shaheer Hassan',
+    title: 'Shaheer Hassan — Full Stack Developer',
     description:
       'Personal portfolio of Shaheer Hassan — a full stack developer building modern web applications.',
     type: 'website',
@@ -34,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang='en' className='scroll-smooth'>
       <body
-        className={`${inter.variable} ${firaCode.variable} font-sans antialiased`}
+        className={`${spaceGrotesk.variable} ${dmSans.variable} ${firaCode.variable} font-sans antialiased`}
       >
         <a
           href='#main-content'
