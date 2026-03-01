@@ -21,13 +21,13 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: 'Shaheer Hassan — Full Stack Developer',
+  title: 'Shaheer Hassan',
   description:
-    'Personal portfolio of Shaheer Hassan — a full stack developer building modern web applications with clean code and thoughtful design.',
+    'Personal portfolio of Shaheer Hassan, a full stack developer building modern web applications with clean code and thoughtful design.',
   openGraph: {
-    title: 'Shaheer Hassan — Full Stack Developer',
+    title: 'Shaheer Hassan',
     description:
-      'Personal portfolio of Shaheer Hassan — a full stack developer building modern web applications.',
+      'Personal portfolio of Shaheer Hassan, a full stack developer building modern web applications.',
     type: 'website',
   },
 };

@@ -19,7 +19,7 @@ export function Projects() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           title="Projects"
-          subtitle="Stuff I shipped — and what I learned building it."
+          subtitle="Stuff I shipped."
         />
 
         <div

@@ -10,7 +10,7 @@ export const siteConfig = {
   name: 'Shaheer Hassan',
   role: 'Full Stack Developer',
   email: 'hassanshaheerw@gmail.com',
-  bio: 'I craft performant web applications that turn complex problems into clean, intuitive experiences — from database to pixel.',
+  bio: 'I craft performant web applications that turn complex problems into clean, intuitive experiences from database to pixel.',
   shortBio: 'Developer, problem-solver, and perpetual learner.',
   avatarUrl: '/images/avatar.jpg',
   resumeUrl: '/resume.pdf',
@@ -33,7 +33,7 @@ export const experience: Experience[] = [
   {
     role: 'Software Engineer',
     company: 'LearningModeAI',
-    period: '2024 — 2025',
+    period: '2024 - 2025',
     description:
       'Led the frontend team for a SaaS platform reaching 50k+ users. Architected the component library and design system from the ground up, improving development velocity by 40%.',
   },
@@ -111,7 +111,7 @@ export const projects: Project[] = [
     title: 'Dev Link',
     description:
       'A Reddit-like community platform for developers to share posts, discuss topics, upvote content, and collaborate.',
-    longDescription: 'Wanted to understand the full lifecycle of a social platform — from auth and feeds to real-time voting and moderation.',
+    longDescription: 'Wanted to understand the full lifecycle of a social platform, from auth and feeds to real-time voting and moderation.',
     image: '/images/projects/dev-link.svg',
     tags: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'TypeScript'],
     category: 'Full Stack',
@@ -123,7 +123,7 @@ export const projects: Project[] = [
     title: 'Parking Spot Detector',
     description:
       'A computer vision application that detects available parking spots in real-time using video feed analysis.',
-    longDescription: 'Dove into computer vision to solve an everyday frustration — finding parking. Uses OpenCV for frame-level analysis.',
+    longDescription: 'Dove into computer vision to solve an everyday frustration, finding parking. Uses OpenCV for frame-level analysis.',
     image: '/images/projects/parking-spot-detector.svg',
     tags: ['Python', 'OpenCV', 'Machine Learning', 'Computer Vision'],
     category: 'AI/ML',

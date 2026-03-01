@@ -94,7 +94,7 @@ export function Contact() {
             </h3>
             <p className="mb-6 leading-relaxed text-muted">
               Whether it&apos;s a full-stack application, an API, or a
-              conversation about distributed systems — I&apos;m always open
+              conversation about distributed systems, I&apos;m always open
               to discussing new ideas. Drop me a message and I&apos;ll reply
               within 24 hours.
             </p>
