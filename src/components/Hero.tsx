@@ -104,7 +104,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
           className="mt-3 font-heading text-lg text-foreground/80"
         >
-          {siteConfig.name} — <RotatingText />
+          {siteConfig.name} <RotatingText />
         </motion.p>
 
         <motion.div

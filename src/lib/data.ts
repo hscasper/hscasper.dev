@@ -35,7 +35,7 @@ export const experience: Experience[] = [
     company: 'LearningModeAI',
     period: '2024 - 2025',
     description:
-      'Led the frontend team for a SaaS platform reaching 50k+ users. Architected the component library and design system from the ground up, improving development velocity by 40%.',
+      'Developed and enhanced platform features, including content generation, user engagement tools, and media processing, while improving system performance, reliability, and scalability.',
   },
 ];
 
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     image: '/images/projects/sakeen-ai.svg',
     tags: ['Python', 'FastAPI', 'React Native', 'AI/ML', 'PostgreSQL'],
     category: 'AI/ML',
-    githubUrl: 'https://github.com',
+    githubUrl: 'https://github.com/hscasper/SakeenAI',
     featured: true,
   },
   {
@@ -103,7 +103,7 @@ export const projects: Project[] = [
     image: '/images/projects/air-traffic-control.svg',
     tags: ['C++', 'Java', 'Multithreading', 'Data Structures', 'OOP'],
     category: 'Systems',
-    githubUrl: 'https://github.com',
+    githubUrl: 'https://github.com/hscasper/Air-Traffic-Control-System',
     featured: true,
   },
   {
@@ -115,7 +115,7 @@ export const projects: Project[] = [
     image: '/images/projects/dev-link.svg',
     tags: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'TypeScript'],
     category: 'Full Stack',
-    githubUrl: 'https://github.com',
+    githubUrl: 'https://github.com/hscasper/DevLink',
     featured: true,
   },
   {
