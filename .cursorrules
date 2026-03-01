@@ -1,0 +1,12 @@
+You are helping me build a personal portfolio website.
+
+Stack: Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion
+
+Rules:
+- Always use the App Router (not Pages Router)
+- Use TypeScript for every file
+- Use Tailwind for all styling, no inline styles
+- Keep components small and reusable
+- Use 'use client' only when necessary
+- Follow accessibility best practices
+- Ask before installing new packages
