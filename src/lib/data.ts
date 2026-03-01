@@ -12,7 +12,7 @@ export const siteConfig = {
   email: 'hassanshaheerw@gmail.com',
   bio: 'I craft performant web applications that turn complex problems into clean, intuitive experiences — from database to pixel.',
   shortBio: 'Developer, problem-solver, and perpetual learner.',
-  avatarUrl: '/images/avatar',
+  avatarUrl: '/images/avatar.jpg',
   resumeUrl: '/resume.pdf',
 };
 

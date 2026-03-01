@@ -39,7 +39,7 @@ export function About() {
             <p className="mt-4 leading-relaxed text-muted">
               I got hooked on programming by trying to automate things I was too
               lazy to do manually. That curiosity turned into a love for
-              building — from low-level systems in C++ to full-stack apps
+              building, from low-level systems in C++ to full-stack apps
               with React and .NET. When I&apos;m not coding, I&apos;m probably
               exploring a new framework or reading about distributed systems.
             </p>
